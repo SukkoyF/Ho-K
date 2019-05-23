@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     public void EndTurn()
     {
         playing = false;
-        FindObjectOfType<GameManager>().NextTurn();
+        FindObjectOfType<GameManager>().Invoke("NextTurn", 1f);
     }
 
     public void Move()

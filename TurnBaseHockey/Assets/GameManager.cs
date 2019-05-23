@@ -9,13 +9,31 @@ public class GameManager : MonoBehaviour
 
     public Player shooter;
 
+    int currPlayer = 0;
+    bool bothTeamPlayed = false;
+
     private void Start()
     {
-        teamOne[0].StartTurn();
+        teamOne[currPlayer].StartTurn();
     }
 
     public void NextTurn()
     {
-
+        if(currPlayer < teamOne.Count || currPlayer < teamTwo.Count)
+        {
+            if (bothTeamPlayed == false)
+            {
+                teamTwo[currPlayer].StartTurn();
+                bothTeamPlayed = true;
+                currPlayer++;
+            }
+            else
+            {
+                teamOne[currPlayer].StartTurn();
+                bothTeamPlayed = false;
+            }
+        }
     }
+
+    
 }
