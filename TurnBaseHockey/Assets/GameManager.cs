@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     int currPlayer = 0;
     bool bothTeamPlayed = false;
+    bool teamTwoStarting = false;
 
     private void Start()
     {
@@ -21,17 +22,35 @@ public class GameManager : MonoBehaviour
     {
         if(currPlayer < teamOne.Count || currPlayer < teamTwo.Count)
         {
-            if (bothTeamPlayed == false)
+            if(teamTwoStarting == false)
             {
-                teamTwo[currPlayer].StartTurn();
-                bothTeamPlayed = true;
-                currPlayer++;
+                if (bothTeamPlayed == false)
+                {
+                    teamTwo[currPlayer].StartTurn();
+                    bothTeamPlayed = true;
+                    currPlayer++;
+                }
+                else
+                {
+                    teamOne[currPlayer].StartTurn();
+                    bothTeamPlayed = false;
+                }
             }
             else
             {
-                teamOne[currPlayer].StartTurn();
-                bothTeamPlayed = false;
+                if (bothTeamPlayed == false)
+                {
+                    teamOne[currPlayer].StartTurn();
+                    bothTeamPlayed = true;
+                    currPlayer++;
+                }
+                else
+                {
+                    teamTwo[currPlayer].StartTurn();
+                    bothTeamPlayed = false;
+                }
             }
+
         }
         else
         {
@@ -45,17 +64,30 @@ public class GameManager : MonoBehaviour
         int i = 0;
         while(i < teamOne.Count)
         {
-            teamOne[i].Move();
+            if(teamTwoStarting == false)
+            {
+                teamOne[i].Move();
 
-            yield return new WaitForSeconds(.25f);
+                yield return new WaitForSeconds(.25f);
 
-            teamTwo[i].Move();
+                teamTwo[i].Move();
+            }
+            else
+            {
+                teamTwo[i].Move();
+
+                yield return new WaitForSeconds(.25f);
+
+                teamOne[i].Move();
+            }
+    
 
             i++;
         }
 
         yield return new WaitForSeconds(3f);
 
+        teamTwoStarting = !teamTwoStarting;
         NextTurn();
     }
 }
