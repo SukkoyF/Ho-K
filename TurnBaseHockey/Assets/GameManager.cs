@@ -7,7 +7,10 @@ public class GameManager : MonoBehaviour
     public List<Player> teamOne;
     public List<Player> teamTwo;
 
-    public Player shooter;
+    public static Player shooter;
+
+    int redPoints;
+    int bluePoints;
 
     int currPlayer = 0;
     bool bothTeamPlayed = false;
@@ -66,6 +69,8 @@ public class GameManager : MonoBehaviour
         {
             if(teamTwoStarting == false)
             {
+                yield return new WaitForSeconds(.25f);
+
                 teamOne[i].Move();
 
                 yield return new WaitForSeconds(.25f);
@@ -74,6 +79,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                yield return new WaitForSeconds(.25f);
+
                 teamTwo[i].Move();
 
                 yield return new WaitForSeconds(.25f);
@@ -85,9 +92,27 @@ public class GameManager : MonoBehaviour
             i++;
         }
 
+        if(shooter != null)
+        {
+            shooter.Shoot();
+        }
+      
+
         yield return new WaitForSeconds(3f);
 
         teamTwoStarting = !teamTwoStarting;
         NextTurn();
+    }
+
+    public void Score(Teams addPoint)
+    {
+        if(addPoint == Teams.Red)
+        {
+            redPoints++;
+        }
+        else if(addPoint == Teams.Blue)
+        {
+            bluePoints++;
+        }
     }
 }
