@@ -33,7 +33,29 @@ public class GameManager : MonoBehaviour
                 bothTeamPlayed = false;
             }
         }
+        else
+        {
+            StartCoroutine(ExecuteTurn());
+            currPlayer = 0;
+        }
     }
 
-    
+    IEnumerator ExecuteTurn()
+    {
+        int i = 0;
+        while(i < teamOne.Count)
+        {
+            teamOne[i].Move();
+
+            yield return new WaitForSeconds(.25f);
+
+            teamTwo[i].Move();
+
+            i++;
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        NextTurn();
+    }
 }

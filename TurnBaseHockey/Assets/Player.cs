@@ -69,5 +69,6 @@ public class Player : MonoBehaviour
     public void Move()
     {
         _RB.AddForce(direction * throwForce * power, ForceMode2D.Impulse);
+        _PL.SetDisplay(0);
     }
 }
