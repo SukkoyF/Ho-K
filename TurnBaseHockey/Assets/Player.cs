@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 
     bool waitForPuckInput;
 
+    InputSource _InputSource;
+
     private void Awake()
     {
         _RB = GetComponent<Rigidbody2D>();
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
         _SL = shotLine.GetComponent<PowerLine>();
         _Animator = GetComponent<Animator>();
         mainCam = FindObjectOfType<Camera>();
+        _InputSource = GetComponent<InputSource>();
     }
 
     private void Update()
@@ -41,25 +44,20 @@ public class Player : MonoBehaviour
         {
             if (waitForPuckInput == true)
             {
-                shotDirection = mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                shotDirection = _InputSource.GetShotDirection();
                 shotDirection.Normalize();
 
                 _SL.SetDisplay(shotPower);
             }
             else
             {
-                direction = mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                direction = _InputSource.GetDirection();
                 direction.Normalize();
 
                 _PL.SetDisplay(power);
             }  
 
-            if(Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                EndTurn();
-            }
-
-            if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+            if (_InputSource.AdjustPower() < 0)
             {
                 if(waitForPuckInput == true)
                 {
@@ -71,7 +69,7 @@ public class Player : MonoBehaviour
                 }
                
             }
-            else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+            else if (_InputSource.AdjustPower() > 0)
             {
                 if(waitForPuckInput == true)
                 {
@@ -92,12 +90,18 @@ public class Player : MonoBehaviour
 
             shotLine.rotation = Quaternion.LookRotation(Vector3.forward, new Vector2(-shotDirection.y, shotDirection.x));
             shotLine.Rotate(new Vector3(0, 0, -90));
+
+            if (_InputSource.ListenForTurnEnd())
+            {
+                EndTurn();
+            }
         }
     }
 
     public void StartTurn()
     {
         playing = true;
+        _InputSource.TurnStarted();
     }
 
     public void EndTurn()
