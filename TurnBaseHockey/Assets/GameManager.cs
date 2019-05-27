@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public List<Player> teamOne;
     public List<Player> teamTwo;
 
+    public GameObject goalSound;
+
     public static Player shooter;
 
-    int redPoints;
-    int bluePoints;
+    public static int redPoints;
+    public static int bluePoints;
 
     int currPlayer = 0;
     bool bothTeamPlayed = false;
@@ -19,6 +22,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         teamOne[currPlayer].StartTurn();
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void NextTurn()
@@ -106,6 +117,7 @@ public class GameManager : MonoBehaviour
 
     public void Score(Teams addPoint)
     {
+        Instantiate(goalSound, transform.position, Quaternion.identity);
         if(addPoint == Teams.Red)
         {
             redPoints++;
@@ -114,5 +126,14 @@ public class GameManager : MonoBehaviour
         {
             bluePoints++;
         }
+
+        StartCoroutine(Reload());
+    }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -112,7 +112,8 @@ public class AI : InputSource
 
     public override int AdjustPower()
     {
-        return 1;
+        GetComponent<Player>().SetPower(Random.Range(1, 4));
+        return 0;
     }
 
     public override void TurnStarted()

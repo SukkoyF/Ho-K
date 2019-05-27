@@ -15,6 +15,11 @@ public class Player : MonoBehaviour
     public Transform powerLine;
     public Transform shotLine;
 
+    public Transform myDisplay;
+
+    public GameObject sfx;
+    public GameObject shotSFX;
+
     bool playing = false;
 
     PowerLine _PL;
@@ -46,15 +51,11 @@ public class Player : MonoBehaviour
             {
                 shotDirection = _InputSource.GetShotDirection();
                 shotDirection.Normalize();
-
-                _SL.SetDisplay(shotPower);
             }
             else
             {
                 direction = _InputSource.GetDirection();
                 direction.Normalize();
-
-                _PL.SetDisplay(power);
             }  
 
             if (_InputSource.AdjustPower() < 0)
@@ -91,10 +92,50 @@ public class Player : MonoBehaviour
             shotLine.rotation = Quaternion.LookRotation(Vector3.forward, new Vector2(-shotDirection.y, shotDirection.x));
             shotLine.Rotate(new Vector3(0, 0, -90));
 
+            if(waitForPuckInput == true)
+            {
+                _SL.SetDisplay(shotPower);
+            }
+        
+            _PL.SetDisplay(power);
+
             if (_InputSource.ListenForTurnEnd())
             {
                 EndTurn();
             }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if(_RB.velocity.magnitude > .05f)
+        {
+            myDisplay.GetComponent<Animator>().SetBool("Moving", true);
+        }
+        else
+        {
+            myDisplay.GetComponent<Animator>().SetBool("Moving", false);
+        }
+
+        if(_RB.velocity.x > 0)
+        {
+            myDisplay.transform.localScale = new Vector3(2, 2, 1);
+        }
+        else if(_RB.velocity.x < 0)
+        {
+            myDisplay.transform.localScale = new Vector3(-2, 2, 1);
+        }
+    }
+
+    public void SetPower(int i)
+    {
+        if (waitForPuckInput == true)
+        {
+            shotPower = i;
+        }
+        else
+        {
+            power = i;
         }
     }
 
@@ -120,6 +161,8 @@ public class Player : MonoBehaviour
 
     public void Move()
     {
+        Instantiate(sfx, transform.position, Quaternion.identity);
+
         _RB.AddForce(direction * throwForce * power, ForceMode2D.Impulse);
         _PL.SetDisplay(0);
     }
@@ -139,6 +182,7 @@ public class Player : MonoBehaviour
 
             instance.GetComponent<Rigidbody2D>().AddForce(shotDirection * shotPower * shotForce, ForceMode2D.Impulse);
 
+            Instantiate(shotSFX, transform.position, Quaternion.identity);
             GameManager.shooter = null;
             shotDirection = Vector2.zero;
             _SL.SetDisplay(0);
