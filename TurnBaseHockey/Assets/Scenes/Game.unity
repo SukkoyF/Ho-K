@@ -760,7 +760,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395990190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14, y: 1, z: -0.2109375}
+  m_LocalPosition: {x: 14, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 153352469}
@@ -916,6 +916,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184509267, guid: e2b7fab5bf5d2294f892458548ecc594, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b7fab5bf5d2294f892458548ecc594, type: 3}
@@ -1469,6 +1473,10 @@ PrefabInstance:
       propertyPath: allyGoal
       value: 
       objectReference: {fileID: 395990192}
+    - target: {fileID: 731828992, guid: 3f86f90d9bc8acf468c91903c6db29ed, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f86f90d9bc8acf468c91903c6db29ed, type: 3}
 --- !u!4 &1307229138 stripped
@@ -1555,6 +1563,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184509267, guid: e2b7fab5bf5d2294f892458548ecc594, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b7fab5bf5d2294f892458548ecc594, type: 3}
@@ -1706,6 +1718,10 @@ PrefabInstance:
       propertyPath: allyGoal
       value: 
       objectReference: {fileID: 395990192}
+    - target: {fileID: 731828992, guid: 3f86f90d9bc8acf468c91903c6db29ed, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f86f90d9bc8acf468c91903c6db29ed, type: 3}
 --- !u!4 &1347384646 stripped
@@ -1803,6 +1819,10 @@ PrefabInstance:
       propertyPath: allyGoal
       value: 
       objectReference: {fileID: 395990192}
+    - target: {fileID: 731828992, guid: 3f86f90d9bc8acf468c91903c6db29ed, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4016442115911960807, guid: 3f86f90d9bc8acf468c91903c6db29ed,
         type: 3}
       propertyPath: m_Color.a
@@ -1853,7 +1873,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453310816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14, y: 1, z: -0.2109375}
+  m_LocalPosition: {x: -14, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 18235959}
@@ -2329,6 +2349,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1184509267, guid: e2b7fab5bf5d2294f892458548ecc594, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b7fab5bf5d2294f892458548ecc594, type: 3}
 --- !u!1 &1992429999
@@ -2612,6 +2636,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1184509267, guid: e2b7fab5bf5d2294f892458548ecc594, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b7fab5bf5d2294f892458548ecc594, type: 3}
 --- !u!1001 &7492711395669242760
@@ -2691,6 +2719,10 @@ PrefabInstance:
       propertyPath: allyGoal
       value: 
       objectReference: {fileID: 395990192}
+    - target: {fileID: 731828992, guid: 3f86f90d9bc8acf468c91903c6db29ed, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f86f90d9bc8acf468c91903c6db29ed, type: 3}
 --- !u!114 &7492711395669242761 stripped
